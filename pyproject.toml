@@ -21,3 +21,10 @@ dependencies = []
 [project.urls]
 Homepage = "https://github.com/taiduc1001/syk4y"
 Issues = "https://github.com/taiduc1001/syk4y/issues"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+branch = "main"
+build_command = "python -m build"
+commit_parser = "angular"
+minor_on_zero = true
