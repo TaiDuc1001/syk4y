@@ -26,5 +26,6 @@ Issues = "https://github.com/taiduc1001/syk4y/issues"
 version_toml = ["pyproject.toml:project.version"]
 branch = "main"
 build_command = "python -m build"
-commit_parser = "angular"
+commit_parser = "conventional"
 minor_on_zero = true
+changelog_file = ""
