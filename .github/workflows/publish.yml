@@ -11,8 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Full history for semantic-release to analyze commits
-          token: ${{ secrets.GITHUB_TOKEN }}  # Needed to push version bump commits
+          fetch-depth: 0  
+          token: ${{ secrets.GITHUB_TOKEN }}  
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -25,14 +25,9 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "action@github.com"
-          semantic-release version --no-push  # Bump version but don't push yet
+          semantic-release publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Push version bump commit
-        run: |
-          git push origin main
-      - name: Build package
-        run: python -m build
       - name: Store distribution packages
         uses: actions/upload-artifact@v4
         with:

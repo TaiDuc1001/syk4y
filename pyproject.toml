@@ -28,4 +28,7 @@ branch = "main"
 build_command = "python -m build"
 commit_parser = "conventional"
 minor_on_zero = true
-changelog_file = ""
+changelog_file = "CHANGELOG.md"
+publish_commands = """
+  gh release create v{version} --title "Release v{version}" --notes-file CHANGELOG.md dist/*.whl dist/*.tar.gz
+"""
