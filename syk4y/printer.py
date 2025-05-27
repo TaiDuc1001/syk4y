@@ -1,5 +1,6 @@
 from typing import Any
 
+# Import torch and numpy only if available
 try:
     import torch # type: ignore[import]
 except ImportError:
