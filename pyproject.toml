@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "syk4y"
-dynamic = ["version"]
+version = "1.0.0"
 authors = [
   { name = "Duc Tai Phan", email = "phantaiduc2005@gmail.com" },
 ]
@@ -13,47 +13,17 @@ readme = "README.md"
 requires-python = ">=3.7"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-keywords = ["utility", "syk4y", "organization"]
-dependencies = [
-    "termcolor>=2.0",
-]
+dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/taiduc1001/syk4y"
 Issues = "https://github.com/taiduc1001/syk4y/issues"
-Source = "https://github.com/taiduc1001/syk4y"
-Documentation = "https://github.com/taiduc1001/syk4y#readme"
-
-[project.optional-dependencies]
-test = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-]
-dev = [
-    "pytest>=7.0",
-    "pytest-cov>=4.0",
-    "tox>=4.0",
-    "pre-commit>=3.0",
-]
-
-[tool.hatch.version]
-path = "syk4y/__init__.py"
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = "test_*.py"
-addopts = "--verbose --cov=syk4y --cov-report=html"
 
 [tool.semantic_release]
-version_variable = ["pyproject.toml:project.version", "syk4y/__init__.py:__version__"]
+version_toml = ["pyproject.toml:project.version"]
 branch = "main"
 build_command = "python -m build"
 commit_parser = "conventional"
