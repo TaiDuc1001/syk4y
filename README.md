@@ -11,11 +11,19 @@ pip install syk4y
 ## Usage
 
 ```python
-from syk4y import inspect
+from syk4y.printer import inspect
 
 # Example usage
-inspect(some_variable)
+data = {'a': 1, 'b': [2, 3], 'c': {'d': 4}}
+inspect(data)
 ```
+
+## Features
+- Recursively inspects and prints the structure of any Python variable
+- Supports lists, tuples, dicts, sets, namedtuples, dataclasses, enums, tensors (PyTorch), arrays (NumPy), and more
+- Handles cyclic references and max recursion depth
+- Colorful output (with `termcolor`)
+- Designed for debugging and data exploration
 
 ## License
 
