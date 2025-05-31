@@ -29,7 +29,7 @@ def format_memory_size(size_bytes: int) -> str:
 
 def inspect(
     var: Any,
-    indent: int = 0,
+    indent: int = 1,
     prefix: str = "Variable",
     max_depth: int = 10,
     file=sys.stdout,
@@ -99,16 +99,14 @@ def inspect(
         dtype = str(var.dtype)
         device = str(var.device)
         print_type_info(shape, dtype, f", device={device}")
-        if var.numel() <= 10:  # Show small tensor values
-            print(colored(f"{indent_str}  Values: {var.tolist()}", "blue"), file=file)
+        # Do not print values
 
     # Handle NumPy Array
     elif np is not None and isinstance(var, np.ndarray):
         shape = tuple(var.shape)
         dtype = str(var.dtype)
         print_type_info(shape, dtype)
-        if var.size <= 10:  # Show small array values
-            print(colored(f"{indent_str}  Values: {var.tolist()}", "blue"), file=file)
+        # Do not print values
 
     # Handle List
     elif isinstance(var, list):
