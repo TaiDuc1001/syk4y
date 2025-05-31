@@ -100,6 +100,7 @@ def inspect(
         device = str(var.device)
         print_type_info(shape, dtype, f", device={device}")
         # Do not print values
+        return
 
     # Handle NumPy Array
     elif np is not None and isinstance(var, np.ndarray):
@@ -107,6 +108,7 @@ def inspect(
         dtype = str(var.dtype)
         print_type_info(shape, dtype)
         # Do not print values
+        return
 
     # Handle List
     elif isinstance(var, list):
