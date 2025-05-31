@@ -2,6 +2,22 @@
 
 <!-- version list -->
 
+## v1.1.0 (2025-05-28)
+
+### Bug Fixes
+
+- Remove test
+  ([`caafc6d`](https://github.com/TaiDuc1001/syk4y/commit/caafc6d4b42643a0c8ad2041827b76ee2befd49c))
+
+- Tag not bump
+  ([`ce4f808`](https://github.com/TaiDuc1001/syk4y/commit/ce4f808cb2408f1335a0271bf382ec9bfdb15da7))
+
+### Features
+
+- Add test
+  ([`ad04169`](https://github.com/TaiDuc1001/syk4y/commit/ad04169f86cacb35d82e9d0cc7539bbad90db814))
+
+
 ## v1.0.1 (2025-05-27)
 
 ### Bug Fixes
