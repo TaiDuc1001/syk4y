@@ -29,8 +29,8 @@ def format_memory_size(size_bytes: int) -> str:
 
 def inspect(
     var: Any,
-    indent: int = 1,
     prefix: str = "Variable",
+    indent: int = 1,
     max_depth: int = 10,
     file=sys.stdout,
     visited: Set[int] = None,
@@ -98,23 +98,50 @@ def inspect(
         shape = tuple(var.shape)
         dtype = str(var.dtype)
         device = str(var.device)
-        print_type_info(shape, dtype, f", device={device}")
-        # Do not print values
+        print(colored(f"{indent_str}{prefix}: Tensor(shape={shape}, dtype={dtype}, device={device})", "green"), file=file)
         return
 
     # Handle NumPy Array
     elif np is not None and isinstance(var, np.ndarray):
         shape = tuple(var.shape)
         dtype = str(var.dtype)
-        print_type_info(shape, dtype)
-        # Do not print values
+        print(colored(f"{indent_str}{prefix}: ndarray(shape={shape}, dtype={dtype})", "green"), file=file)
         return
 
     # Handle List
     elif isinstance(var, list):
+        # Check if all elements are tensors or arrays for concise summary
+        is_tensor_list = torch is not None and all(isinstance(item, torch.Tensor) for item in var)
+        is_array_list = np is not None and all(isinstance(item, np.ndarray) for item in var)
+        if is_tensor_list:
+            print(colored(f"{indent_str}{prefix}: List(length={len(var)})", "magenta"), file=file)
+            for i, item in enumerate(var):
+                shape = tuple(item.shape)
+                dtype = str(item.dtype)
+                device = str(item.device)
+                print(colored(f"{indent_str}  [{i}]: Tensor(shape={shape}, dtype={dtype}, device={device})", "green"), file=file)
+            return
+        elif is_array_list:
+            print(colored(f"{indent_str}{prefix}: List(length={len(var)})", "magenta"), file=file)
+            for i, item in enumerate(var):
+                shape = tuple(item.shape)
+                dtype = str(item.dtype)
+                print(colored(f"{indent_str}  [{i}]: ndarray(shape={shape}, dtype={dtype})", "green"), file=file)
+            return
+        # Default recursive behavior, but suppress values for tensors/arrays
         print(colored(f"{indent_str}{prefix}: List(length={len(var)})", "magenta"), file=file)
         for i, item in enumerate(var):
-            inspect(item, indent + 1, f"[{i}]", max_depth, file, visited, _current_depth + 1)
+            if (torch is not None and isinstance(item, torch.Tensor)):
+                shape = tuple(item.shape)
+                dtype = str(item.dtype)
+                device = str(item.device)
+                print(colored(f"{indent_str}  [{i}]: Tensor(shape={shape}, dtype={dtype}, device={device})", "green"), file=file)
+            elif (np is not None and isinstance(item, np.ndarray)):
+                shape = tuple(item.shape)
+                dtype = str(item.dtype)
+                print(colored(f"{indent_str}  [{i}]: ndarray(shape={shape}, dtype={dtype})", "green"), file=file)
+            else:
+                inspect(item, indent + 1, f"[{i}]", max_depth, file, visited, _current_depth + 1)
 
     # Handle Tuple
     elif isinstance(var, tuple):
@@ -219,7 +246,16 @@ def inspect(
         # else fall through to fallback
 
     # Fallback for unhandled types
-    print(colored(f"{indent_str}{prefix}: {type_name}({repr(var)})", "yellow"), file=file)
+    if type_name == "Tensor":
+        shape = getattr(var, 'shape', None)
+        dtype = getattr(var, 'dtype', None)
+        device = getattr(var, 'device', None)
+        shape_str = f"shape={tuple(shape)}" if shape is not None else ""
+        dtype_str = f", dtype={str(dtype)}" if dtype is not None else ""
+        device_str = f", device={str(device)}" if device is not None else ""
+        print(colored(f"{indent_str}{prefix}: Tensor({shape_str}{dtype_str}{device_str})", "green"), file=file)
+        return
+    print(colored(f"{indent_str}{prefix}: {type_name}", "yellow"), file=file)
     return
 
 # Example usage
