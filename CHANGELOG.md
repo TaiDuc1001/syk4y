@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.2.1 (2025-06-01)
+
+### Bug Fixes
+
+- List of tensor
+  ([`a4e21d4`](https://github.com/TaiDuc1001/syk4y/commit/a4e21d49afcff425669a73a7f611cd8b84a867e7))
+
+
 ## v1.2.0 (2025-05-31)
 
 
