@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2025-06-04)
+
+### Features
+
+- Add memory
+  ([`bc2a994`](https://github.com/TaiDuc1001/syk4y/commit/bc2a9941cae4db2a8dfec964848d9a82f3b92cc5))
+
+
 ## v1.2.1 (2025-06-01)
 
 ### Bug Fixes
