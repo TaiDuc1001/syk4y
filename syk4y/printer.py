@@ -70,7 +70,24 @@ def inspect(
         is_array_list = np is not None and all(isinstance(item, np.ndarray) for item in var)
         print(colored(f"{indent_str}{prefix}: List(length={len(var)})", "magenta"), file=file)
         if len(var) > 20:
-            print(colored(f"{indent_str}  <List too long to display>", "yellow"), file=file)
+            # Summarize structure for long lists
+            types = set(type(item).__name__ for item in var)
+            print(colored(f"{indent_str}  <List too long to display, element types: {sorted(types)}>", "yellow"), file=file)
+            preview_count = min(3, len(var))
+            for i in range(preview_count):
+                item = var[i]
+                if torch is not None and isinstance(item, torch.Tensor):
+                    print(colored(f"{indent_str}  [{i}]: Tensor(shape={tuple(item.shape)}, dtype={str(item.dtype)}, device={str(item.device)})", "green"), file=file)
+                elif np is not None and isinstance(item, np.ndarray):
+                    print(colored(f"{indent_str}  [{i}]: ndarray(shape={tuple(item.shape)}, dtype={str(item.dtype)})", "green"), file=file)
+                elif isinstance(item, (list, tuple, dict, set, frozenset)):
+                    print(colored(f"{indent_str}  [{i}]: {type(item).__name__}(length={len(item)})", "yellow"), file=file)
+                else:
+                    print(colored(f"{indent_str}  [{i}]: {type(item).__name__}", "yellow"), file=file)
+            if len(types) == 1:
+                print(colored(f"{indent_str}  ... all elements are {list(types)[0]} ...", "yellow"), file=file)
+            else:
+                print(colored(f"{indent_str}  ... {len(var) - preview_count} more elements ...", "yellow"), file=file)
             return
         for i, item in enumerate(var):
             if is_tensor_list:
