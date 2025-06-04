@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.1 (2025-06-04)
+
+### Bug Fixes
+
+- Remove longlist
+  ([`aa8ab6d`](https://github.com/TaiDuc1001/syk4y/commit/aa8ab6d5978104b24ccece9bc26c4f29985df655))
+
+
 ## v1.3.0 (2025-06-04)
 
 ### Features
