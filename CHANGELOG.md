@@ -2,6 +2,17 @@
 
 <!-- version list -->
 
+## v1.6.0 (2025-06-17)
+
+### Features
+
+- Add zip unzip option
+  ([`33cf7b3`](https://github.com/TaiDuc1001/syk4y/commit/33cf7b362ca922bd102e6faa7892b51dbd46e5c0))
+
+- Convert zip lz4 option
+  ([`69334f8`](https://github.com/TaiDuc1001/syk4y/commit/69334f85f0dcfacd1ac4eb3f206e4f62e21c1c24))
+
+
 ## v1.5.0 (2025-06-17)
 
 
