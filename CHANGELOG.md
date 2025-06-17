@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.3 (2025-06-17)
+
+### Bug Fixes
+
+- Print remotes
+  ([`1297123`](https://github.com/TaiDuc1001/syk4y/commit/1297123e502cf3e6af96169a39bc1e50c0a7fc35))
+
+
 ## v1.7.2 (2025-06-17)
 
 ### Bug Fixes
