@@ -1,9 +1,13 @@
 from .printer import inspect
-from .compress import fast_compress, fast_decompress
+from .compress import fast_compress, fast_decompress, zip, unzip, to_zip, to_lz4
 
 
 __all__ = [
-    "inspect"
+    "inspect",
     "fast_compress",
-    "fast_decompress"
+    "fast_decompress",
+    "zip",
+    "unzip",
+    "to_zip",
+    "to_lz4"
 ]

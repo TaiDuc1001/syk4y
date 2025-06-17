@@ -5,17 +5,17 @@ except ImportError:
     print("LZ4 module not found. Install it using 'pip install lz4'.")
     os.system("pip install lz4")
 
-import lz4.frame
-import tarfile
-import io
-import zipfile
-
 try:
     import tqdm
 except ImportError:
     print("tqdm module not found. Install it using 'pip install tqdm'.")
     os.system("pip install tqdm")
 
+import lz4.frame
+import tarfile
+import io
+import zipfile
+import tempfile
 from tqdm import tqdm
 
 def get_unit(total):
@@ -99,6 +99,22 @@ def unzip(input_file, output_dir=None):
         for member in tqdm(members, desc='Unzipping', unit='file'):
             zipf.extract(member, output_dir)
     print(f"Unzipped to: {os.path.join(output_dir, os.path.basename(input_file).replace('.zip', ''))}")
+
+def to_zip(input_lz4_file, output_zip_file=None):
+    if output_zip_file is None:
+        output_zip_file = os.path.splitext(input_lz4_file)[0] + '.zip'
+    with tempfile.TemporaryDirectory() as tmpdir:
+        fast_decompress(input_lz4_file, tmpdir)
+        zip(tmpdir, output_zip_file)
+    print(f"Converted {input_lz4_file} to {output_zip_file}")
+
+def to_lz4(input_zip_file, output_lz4_file=None):
+    if output_lz4_file is None:
+        output_lz4_file = os.path.splitext(input_zip_file)[0] + '.tar.lz4'
+    with tempfile.TemporaryDirectory() as tmpdir:
+        unzip(input_zip_file, tmpdir)
+        fast_compress(tmpdir, output_lz4_file)
+    print(f"Converted {input_zip_file} to {output_lz4_file}")
 
 if __name__ == "__main__":
     ### Example usage
