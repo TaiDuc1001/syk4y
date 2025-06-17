@@ -8,6 +8,7 @@ except ImportError:
 import lz4.frame
 import tarfile
 import io
+import zipfile
 
 try:
     import tqdm
@@ -76,6 +77,29 @@ def fast_decompress(input_file, output_dir=None):
             tar.extract(member, output_dir)
     print(f"Decompressed to: {os.path.join(output_dir, os.path.basename(input_file).replace('.tar.lz4', ''))}")
 
+def zip(input_dir, output_file=None):
+    if output_file is None:
+        output_file = input_dir + '.zip'
+    with zipfile.ZipFile(output_file, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        file_list = []
+        for root, _, files in os.walk(input_dir):
+            for file in files:
+                full_path = os.path.join(root, file)
+                rel_path = os.path.relpath(full_path, os.path.dirname(input_dir))
+                file_list.append((full_path, rel_path))
+        for full_path, rel_path in tqdm(file_list, desc='Zip', unit='file'):
+            zipf.write(full_path, arcname=rel_path)
+    print(f"Zipped to: {output_file}")
+
+def unzip(input_file, output_dir=None):
+    if output_dir is None:
+        output_dir = '.'
+    with zipfile.ZipFile(input_file, 'r') as zipf:
+        members = zipf.namelist()
+        for member in tqdm(members, desc='Unzipping', unit='file'):
+            zipf.extract(member, output_dir)
+    print(f"Unzipped to: {os.path.join(output_dir, os.path.basename(input_file).replace('.zip', ''))}")
+
 if __name__ == "__main__":
     ### Example usage
     input_directory = "__pycache__"
@@ -84,4 +108,8 @@ if __name__ == "__main__":
     fast_decompress(output_lz4_file, output_dir='decompressed_output')
     # or
     # fast_decompress(output_lz4_file) # Default to current directory
-    
+    zip(input_directory)
+    output_zip_file = input_directory + '.zip'
+    unzip(output_zip_file, output_dir='unzipped_output')
+    # or
+    # unzip(output_zip_file) # Default to current directory
