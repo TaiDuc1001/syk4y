@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.2 (2025-06-17)
+
+### Bug Fixes
+
+- Add install torch numpy pandas
+  ([`4dfe7cb`](https://github.com/TaiDuc1001/syk4y/commit/4dfe7cb24c322c496577c28d8049cdd28dc22571))
+
+
 ## v1.7.1 (2025-06-17)
 
 ### Bug Fixes
