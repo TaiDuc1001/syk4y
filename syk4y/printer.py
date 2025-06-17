@@ -1,4 +1,24 @@
 import sys
+import os
+
+try:
+    import torch
+except ImportError:
+    print("PyTorch module not found. Install it using 'pip install torch'.")
+    os.system("pip install torch")
+
+try:
+    import numpy as np
+except ImportError:
+    print("NumPy module not found. Install it using 'pip install numpy'.")
+    os.system("pip install numpy")
+
+try:
+    import pandas as pd
+except ImportError:
+    print("Pandas module not found. Install it using 'pip install pandas'.")
+    os.system("pip install pandas")
+
 import torch
 import numpy as np
 import pandas as pd
