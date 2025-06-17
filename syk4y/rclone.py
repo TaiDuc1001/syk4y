@@ -11,6 +11,7 @@ def install_rclone(config_key, rclone_root=None):
     if rclone_root is None:
         rclone_root = os.path.expanduser('~/.config/rclone')
     os.system(f'gdown --fuzzy {config_key}')
+    os.system('curl https://rclone.org/install.sh | bash')
     os.system('rclone config file')
     os.system(f'mv rclone.conf {rclone_root}/')
     print('Rclone installed successfully. Rclone configuration file moved to:', os.path.join(rclone_root, 'rclone.conf'))
