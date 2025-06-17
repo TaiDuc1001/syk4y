@@ -17,7 +17,13 @@ def install_rclone(config_key, rclone_root=None):
     print('Rclone installed successfully. Rclone configuration file moved to:', os.path.join(rclone_root, 'rclone.conf'))
 
 def rclone_get_remotes():
-    os.system('rclone listremotes')
+    remotes = os.popen('rclone listremotes').read().strip().split('\n')
+    if remotes == ['']:
+        print("No remotes found. Please configure rclone first.")
+    else:
+        print("Available remotes:")
+        for remote in remotes:
+            print(remote.strip())
 
 def rclone_copy(source, remote, destination):
     os.system(f'rclone copy {source} {remote}:{destination}')
