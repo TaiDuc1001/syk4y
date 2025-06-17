@@ -25,8 +25,15 @@ def rclone_get_remotes():
         for remote in remotes:
             print(remote.strip())
 
-def rclone_copy(source, remote, destination):
-    os.system(f'rclone copy {source} {remote}:{destination}')
+def rclone_copy(source, destination):
+    print("""
+        Destination format is: remote_name:path/to/destination
+        In google drive, the path will be: folder/subfolder/file.txt
+        The remote_name you can get from rclone_get_remotes()
+        Example: rclone_copy('local_file.txt', 'remote_name:folder/subfolder/file.txt')
+        Or: rclone_copy('remote_name:path/to/source', 'path/to/destination')
+    """)
+    os.system(f'rclone copy {source} {destination}')
 
 if __name__ == "__main__":
     # Example usage
