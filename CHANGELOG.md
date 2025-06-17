@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.4 (2025-06-17)
+
+### Bug Fixes
+
+- Add guide to rclone copy
+  ([`55c12fe`](https://github.com/TaiDuc1001/syk4y/commit/55c12fe703f3b76e375a4c057680cfb522b2ae54))
+
+
 ## v1.7.3 (2025-06-17)
 
 ### Bug Fixes
