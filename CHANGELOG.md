@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.7.1 (2025-06-17)
+
+### Bug Fixes
+
+- Add rclone install
+  ([`0cd889c`](https://github.com/TaiDuc1001/syk4y/commit/0cd889c6038d9da88c77ae545110bfa5bba20ce3))
+
+
 ## v1.7.0 (2025-06-17)
 
 
